@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { MagnifyingGlassIcon, UserCircleIcon } from '@heroicons/react/20/solid';
 
 function Header() {
   return (
@@ -13,8 +14,13 @@ function Header() {
 
       <div>
         {/* Search Box */}
-        <form>
-          <input type='text' />
+        <form className='flex items-center space-x-5 bg-white rounded-md p-2 shadow-md flex-1 md:flex-initial'>
+          <MagnifyingGlassIcon className='h-6 w-6 text-gray-400' />
+          <input
+            type='text'
+            placeholder='Search'
+            className='flex-1 outline-none p-2'
+          />
           <button hidden>Search</button>
         </form>
 
