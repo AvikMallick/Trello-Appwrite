@@ -7,11 +7,19 @@ interface BoardState {
   getBoard: () => void;
   setBoardState: (board: Board) => void;
   updateTodoInDB: (todo: Todo, columnId: TypedColumn) => void;
+  newTaskInput: string;
+  newTaskType: TypedColumn;
+  image: File | null;
 
   searchString: string;
   setSearchString: (searchString: string) => void;
 
+  addTask: (todo: string, columnId: TypedColumn, image?: File | null) => void;
   deleteTask: (taskIndex: number, todo: Todo, id: TypedColumn) => void;
+
+  setNewTaskInput: (input: string) => void;
+  setNewTaskType: (columnId: TypedColumn) => void;
+  setImage: (image: File | null) => void;
 }
 
 export const useBoardStore = create<BoardState>((set, get) => ({
@@ -20,7 +28,10 @@ export const useBoardStore = create<BoardState>((set, get) => ({
   },
 
   searchString: '',
+  newTaskInput: '',
   setSearchString: (searchString) => set({ searchString }),
+  newTaskType: 'todo',
+  image: null,
 
   getBoard: async () => {
     const board = await getTodosGroupedByColumn();
@@ -48,6 +59,12 @@ export const useBoardStore = create<BoardState>((set, get) => ({
     );
   },
 
+  setNewTaskInput: (input: string) => set({ newTaskInput: input }),
+
+  setNewTaskType: (columnId: TypedColumn) => set({ newTaskType: columnId }),
+
+  setImage: (image: File | null) => set({ image }),
+
   updateTodoInDB: async (todo, columnId) => {
     await databases.updateDocument(
       process.env.NEXT_PUBLIC_DATABASE_ID!,
@@ -59,4 +76,10 @@ export const useBoardStore = create<BoardState>((set, get) => ({
       }
     );
   },
+
+  addTask: async (
+    todo: string,
+    columnId: TypedColumn,
+    image?: File | null
+  ) => {},
 }));
