@@ -6,6 +6,9 @@ const nextConfig = {
       {
         hostname: 'links.papareact.com',
       },
+      {
+        hostname: 'cloud.appwrite.io',
+      },
     ],
   },
 };
